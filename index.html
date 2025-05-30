@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travel World - Explore the Wonders</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f8fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 1rem 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      /* keep space between logo and nav container */
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      flex: none;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center; /* centers nav links */
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      align-items: center;
+      text-align: center;
+    }
+
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+    .hero {
+      height: 70vh;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 1rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .hero h2 {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      font-weight: 500;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      padding: 4rem 3rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .about {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 4rem;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .about h2 {
+      color: #0077b6;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .destinations {
+      margin-bottom: 4rem;
+    }
+
+    .destinations h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #0077b6;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 1.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .card-content h3 {
+      color: #0077b6;
+      margin-bottom: 0.8rem;
+      font-size: 1.5rem;
+    }
+
+    .card-content p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .testimonials {
+      background: #0077b6;
+      color: white;
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1.5px;
+    }
+
+    .testimonial {
+      font-style: italic;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 1rem auto 0;
+      line-height: 1.8;
+    }
+
+    .testimonial::before {
+      content: "“";
+      font-size: 3rem;
+      vertical-align: top;
+      color: #90e0ef;
+      margin-right: 8px;
+    }
+
+    .cta {
+      background: #023e8a;
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1.2px;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #caf0f8;
+    }
+
+    .btn-primary {
+      background-color: #90e0ef;
+      color: #023e8a;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(144,224,239,0.6);
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background-color: #48cae4;
+    }
+
+    footer {
+      background-color: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Travel World</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="destination.html">Destinations</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Explore the World</h2>
+    <p>Discover the most beautiful places on Earth.</p>
+  </section>
+
+  <section class="about">
+    <h2>About Travel World</h2>
+    <p>At Travel World, we believe that travel is more than just visiting new places—it's about creating memories, experiencing diverse cultures, and broadening your horizons. Whether you're seeking relaxing beaches, thrilling mountain adventures, or historic cities, we're here to guide your next journey with expert tips and curated destinations.</p>
+  </section>
+
+  <section class="destinations">
+    <h2>Featured Destinations</h2>
+    <div class="cards-container">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Maldives" />
+        <div class="card-content">
+          <h3>Maldives</h3>
+          <p>Crystal-clear water, white sandy beaches, and stunning sunsets make the Maldives a tropical paradise.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Switzerland" />
+        <div class="card-content">
+          <h3>Switzerland</h3>
+          <p>Peaceful mountains, scenic train journeys, and snowy adventures await in Switzerland.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://tse3.mm.bing.net/th?id=OIP.J33dgg-LCdcFR3cx65hUkwHaEK&pid=Api&P=0&h=180" alt="Japan" />
+        <div class="card-content">
+          <h3>Japan</h3>
+          <p>Immerse yourself in rich culture, cherry blossoms, technology, and ancient temples in Japan.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?auto=format&fit=crop&w=800&q=80" alt="New Zealand" />
+        <div class="card-content">
+          <h3>New Zealand</h3>
+          <p>Breathtaking landscapes, outdoor adventures, and friendly locals make New Zealand a must-visit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Travelers Say</h2>
+    <p class="testimonial">Travel World helped me find my dream vacation! The guides were detailed, and the recommendations were spot-on. Highly recommend! — Sarah L.</p>
+  </section>
+
+  <section class="cta">
+    <h2>
+  <section class="cta">
+    <h2>Ready to Start Your Adventure?</h2>
+    <p>Join thousands of travelers who trust Travel World to plan unforgettable journeys. Let us help you explore the wonders of the world with ease and confidence.</p>
+    <a href="contact.html" class="btn-primary">Contact Us</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Travel World. All rights reserved.
+  </footer>
+
+</body>
+</html>

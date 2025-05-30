@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explore Destinations - Travel World</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafc;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header */
+    header {
+      background-color: #0077b6;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    nav {
+      margin-top: 0.5rem;
+    }
+    nav a {
+      margin: 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #90e0ef;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(
+          rgba(0, 119, 182, 0.7), 
+          rgba(0, 119, 182, 0.7)
+        ), 
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #f1f1f1;
+      text-align: center;
+      padding: 0 1rem;
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .hero h2 {
+      font-size: 3.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 6px #000;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    /* Main Content */
+    main {
+      flex-grow: 1;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Section Titles */
+    section h2.section-title {
+      font-size: 2.8rem;
+      color: #0077b6;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+    }
+
+    /* Destinations Grid */
+    .destinations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.4rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Card Style */
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 4px solid #0077b6;
+      transition: transform 0.35s ease;
+    }
+    .card:hover img {
+      transform: scale(1.05);
+    }
+    .card-content {
+      padding: 1.5rem 1.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-content h3 {
+      color: #023e8a;
+      margin-bottom: 0.8rem;
+      font-size: 1.6rem;
+    }
+    .card-content p {
+      color: #444;
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+    .card-content .btn {
+      margin-top: 1.2rem;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      align-self: flex-start;
+    }
+    .card-content .btn:hover {
+      background-color: #0096c7;
+    }
+
+    /* Category Section */
+    .categories {
+      margin-bottom: 4rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .category {
+      background: #90e0ef;
+      color: #023e8a;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    .category:hover {
+      background: #0077b6;
+      color: #caf0f8;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1.8rem 1rem;
+      font-size: 1rem;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.15);
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    footer p {
+      margin: 0;
+    }
+    /* Social Icons */
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-icons a {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      fill: white;
+      transition: fill 0.3s ease;
+    }
+    .social-icons a:hover {
+      fill: #90e0ef;
+    }
+
+    /* Responsive Text */
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .hero h2 {
+        font-size: 2.4rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .card-content h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Travel World</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="destination.html">Destinations</a>
+    <a href="#categories">Categories</a>
+    <a href="#popular">Popular</a>
+  </nav>
+</header>
+
+<section class="hero" aria-label="Explore the World Banner">
+  <h2>Explore the World</h2>
+  <p>Discover breathtaking destinations, plan your perfect trip, and make memories that last a lifetime.</p>
+</section>
+
+<main>
+
+  <section id="categories">
+    <h2 class="section-title">Travel Categories</h2>
+    <div class="categories">
+      <div class="category" tabindex="0">Beaches</div>
+      <div class="category" tabindex="0">Mountains</div>
+      <div class="category" tabindex="0">Cities</div>
+      <div class="category" tabindex="0">Historical</div>
+      <div class="category" tabindex="0">Adventure</div>
+    </div>
+  </section>
+
+  <section id="popular">
+    <h2 class="section-title">Popular Destinations</h2>
+    <div class="destinations">
+      <article class="card" tabindex="0" aria-label="Maldives Destination Card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Maldives Beach" />
+        <div class="card-content">
+          <h3>Maldives</h3>
+          <p>Crystal-clear water, white sand beaches, and breathtaking sunsets await you in the Maldives.</p>
+          <button class="btn" aria-label="Explore Maldives">Explore</button>
+        </div>
+      </article>
+      <article class="card" tabindex="0" aria-label="Switzerland Destination Card">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Switzerland Mountains" />
+        <div class="card-content">
+          <h3>Switzerland</h3>
+          <p>Experience serene mountain landscapes, scenic trains, and snowy adventures in Switzerland.</p>
+          <button class="btn" aria-label="Explore Switzerland">Explore</button>
+        </div>
+      </article>
+      <article class="card" tabindex="0" aria-label="Japan Destination Card">
+        <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=800&q=80" alt="Japan Cherry Blossoms" />
+        <div class="card-content">
+          <h3>Japan</h3>
+          <p>From vibrant cities to ancient temples, cherry blossoms, and advanced technology — Japan has it all.</p>
+          <button class="btn" aria-label="Explore Japan">Explore</button>
+        </div>
+      </article>
+      <article class="card" tabindex="0" aria-label="New Zealand Destination Card">
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80" alt="New Zealand Mountains and Lakes" />
+        <div class="card-content">
+          <h3>New Zealand</h3>
+          <p>Adventure seekers will love New Zealand’s stunning mountains, lakes, and outdoor activities.</p>
+          <button class="btn" aria-label="Explore New Zealand">Explore</button>
+        </div>
+      </article>
+      <article class="card" tabindex="0" aria-label="Paris Destination Card">
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" alt="Paris Eiffel Tower" />
+        <div class="card-content">
+          <h3>Paris</h3>
+          <p>Fall in love with the City of Lights — iconic landmarks, art, culture, and amazing cuisine.</p>
+          <button class="btn" aria-label="Explore Paris">Explore</button>
+        </div>
+      </article>
+      <article class="card" tabindex="0" aria-label="Bali Destination Card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Bali Tropical Beach" />
+        <div class="card-content">
+          <h3>Bali</h3>
+          <p>Relax on tropical beaches, explore rice terraces, and experience rich culture in Bali.</p>
+          <button class="btn" aria-label="Explore Bali">Explore</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 Travel World</p>
+  <div class="social-icons" aria-label="Social Media Links">
+    <a href="#" aria-label="Facebook" title="Facebook" role="link" tabindex="0" >
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35C.594 0 0 .593 0 1.325v21.351C0 23.405.594 24 1.325 24H12v-9.294H9.294v-3.647H12V8.41c0-2.681 1.634-4.143 4.022-4.143 1.14 0 2.122.084 2.407.122v2.792h-1.652c-1.296 0-1.548.617-1.548 1.522v1.994h3.1l-.404 3.647H15.23V24h7.444c.73 0 1.325-.594 1.325-1.324V1.325C24 .594 23.405 0 22.675 0z"/></svg>
+    </a>
+    <a href="#" aria-label="Twitter" title="Twitter" role="link" tabindex="0" >
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.57c-.885.392-1.83.656-2.825.775 1.014-.607 1.794-1.57 2.163-2.724-.951.564-2.005.974-3.127 1.195-.897-.954-2.173-1.55-3.591-1.55-2.717 0-4.92 2.204-4.92 4.92 0 .39.044.765.127 1.124C7.69 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.217 2.188 4.099-.807-.026-1.566-.247-2.228-.616v.061c0 2.386 1.697 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.928-.086.627 1.956 2.444 3.379 4.6 3.42-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.79-.023-1.17-.069 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14-7.496 14-13.986 0-.21 0-.423-.015-.633.962-.695 1.8-1.562 2.46-2.549z"/></svg>
+    </a>
+    <a href="#" aria-label="Instagram" title="Instagram" role="link" tabindex="0" >
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5a4.25 4.25 0 00-4.25 4.25v8.5a4.25 4.25 0 004.25 4.25h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zm8.75 2.5a1 1 0 110 2 1 1 0 010-2zm-4.25 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.5a3 3 0 100 6 3 3 0 000-6z"/></svg>
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
